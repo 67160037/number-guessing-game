@@ -3,6 +3,29 @@
 let secretNumber = 0;
 // ตัวแปรนับจํานวนครั้งที่ทาย
 let attemptCount = 0;
+
+let bestScore = localStorage.getItem("highScore");
+
+// แสดง High Score
+function showHighScore() {
+  const highScoreContainer = document.getElementById("highScoreContainer");
+  if (!highScoreContainer) return;
+
+  if (bestScore) {
+    highScoreContainer.textContent = `🏆 High Score: ${bestScore} ครั้ง`;
+  } else {
+    highScoreContainer.textContent = "";
+  }
+}
+
+// อัปเดต High Score
+function updateHighScore() {
+  if (!bestScore || attemptCount < bestScore) {
+    bestScore = attemptCount;
+    localStorage.setItem("highScore", bestScore);
+  }
+}
+
 function updateDisplay() {
   const attemptsContainer = document.getElementById("attemptsContainer");
   attemptsContainer.textContent = `ทายแล้ว: ${attemptCount} ครั้ง`;
@@ -12,6 +35,7 @@ function initializeGame() {
   secretNumber = Math.floor(Math.random() * 100) + 1;
   attemptCount = 0;
   updateDisplay();
+  showHighScore(); //เพิ่มบรรทัดนี้
 }
 
 // ฟังก์ชันตรวจสอบการทาย
@@ -39,6 +63,8 @@ function checkGuess() {
   }
   attemptCount++; // เพิ่มตรงนี้
   if (guessValue === secretNumber) {
+    updateHighScore(); // ⭐ เพิ่ม
+    showHighScore(); // ⭐ เพิ่ม
     resultContainer.innerHTML = `
  <div class="alert alert-success" role="alert">
  <h5>✓ ถูกต้อง!</h5>
@@ -71,6 +97,7 @@ function resetGame() {
   document.getElementById("guessInput").value = "";
   document.getElementById("guessInput").focus();
 }
+
 // เริ่มเกมเมื่อโหลดหน้า
 window.addEventListener("load", initializeGame);
 
