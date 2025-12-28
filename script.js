@@ -3,6 +3,10 @@
 let secretNumber = 0;
 // ตัวแปรนับจํานวนครั้งที่ทาย
 let attemptCount = 0;
+function updateDisplay() {
+  const attemptsContainer = document.getElementById("attemptsContainer");
+  attemptsContainer.textContent = `ทายแล้ว: ${attemptCount} ครั้ง`;
+}
 // ฟังก์ชันเริ่มเกมใหม่
 function initializeGame() {
   secretNumber = Math.floor(Math.random() * 100) + 1;
@@ -33,7 +37,7 @@ function checkGuess() {
  `;
     return;
   }
-  attemptCount++;
+  attemptCount++; // เพิ่มตรงนี้
   if (guessValue === secretNumber) {
     resultContainer.innerHTML = `
  <div class="alert alert-success" role="alert">
