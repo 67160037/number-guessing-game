@@ -30,11 +30,19 @@ body {
   font-weight: bold;
   color: #667eea;
 }
+/* High Score */
+#highScoreContainer {
+  font-size: 1.1rem;
+  color: #28a745;
+}
 @media (max-width: 576px) {
   .card-title {
     font-size: 1.5rem;
   }
   .container {
     margin-top: 2rem;
+  }
+  .btn {
+    font-size: 0.95rem;
   }
 }
